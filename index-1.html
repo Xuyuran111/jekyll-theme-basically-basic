@@ -1,0 +1,988 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>未知 </title></head><body>
+<h1 id="basically-basic-jekyll-theme"><a href="https://mmistakes.github.io/jekyll-theme-basically-basic/">Basically Basic Jekyll Theme</a></h1>
+<p><a href="https://github.com/mmistakes/jekyll-theme-basically-basic/blob/master/LICENSE"><img alt="LICENSE" src="https://img.shields.io/badge/license-MIT-lightgrey.svg" /></a>
+<a href="https://jekyllrb.com/"><img alt="Jekyll" src="https://img.shields.io/badge/jekyll-%3E%3D%203.6-blue.svg" /></a>
+<a href="https://rubygems.org/gems/jekyll-theme-basically-basic"><img alt="Ruby gem" src="https://img.shields.io/gem/v/jekyll-theme-basically-basic.svg" /></a>
+<a href="https://www.paypal.me/mmistakes"><img alt="Tip Me via PayPal" src="https://img.shields.io/badge/PayPal-tip%20me-green.svg?logo=paypal" /></a></p>
+<p>Basically Basic is a <a href="https://jekyllrb.com/docs/themes/">Jekyll theme</a> meant as 
+a substitute for the default <a href="https://github.com/jekyll/minima">Minima</a>, with a 
+few enhancements thrown in for good measure:</p>
+<ul>
+<li>Clean responsive design with <a href="#skin">six customizable skins</a></li>
+<li>Curriculum VitÃ¦/Resume layout powered by <a href="http://registry.jsonresume.org/">JSON data</a></li>
+<li>About page layout</li>
+<li>Site-wide search provided by <a href="https://www.algolia.com/">Algolia</a> or <a href="https://lunrjs.com/">Lunr</a>.</li>
+<li>Disqus Comments and Google Analytics support</li>
+<li>SEO best practices via <a href="https://github.com/jekyll/jekyll-seo-tag/">Jekyll SEO Tag</a></li>
+</ul>
+<p><strong>If you enjoy this theme, please consider <a href="https://www.paypal.me/mmistakes">supporting me</a> for developing and maintaining it.</strong></p>
+<p><a href="https://www.paypal.me/mmistakes"><img alt="Support via PayPal" src="https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg" /></a></p>
+<p><a href="https://mmistakes.github.io/jekyll-theme-basically-basic/"><img alt="Basically Basic live preview" src="https://cloud.githubusercontent.com/assets/1376749/24117647/6dede894-0d81-11e7-9c2c-f19bea45e219.jpg" title="live preview" /></a></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#ruby-gem-method">Ruby Gem Method</a></li>
+<li><a href="#github-pages-method">GitHub Pages Method</a><ol>
+<li><a href="#remove-the-unnecessary">Remove the Unnecessary</a></li>
+</ol>
+</li>
+<li><a href="#upgrading">Upgrading</a></li>
+<li><a href="#ruby-gem">Ruby Gem</a></li>
+<li><a href="#remote-theme">Remote Theme</a></li>
+<li><a href="#use-git">Use Git</a><ol>
+<li><a href="#pull-down-updates">Pull Down Updates</a></li>
+</ol>
+</li>
+<li><a href="#update-files-manually">Update Files Manually</a></li>
+<li><a href="#structure">Structure</a></li>
+<li><a href="#starting-fresh">Starting Fresh</a></li>
+<li><a href="#starting-from-jekyll-new">Starting from <code>jekyll new</code></a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#skin">Skin</a></li>
+<li><a href="#google-fonts">Google Fonts</a></li>
+<li><a href="#text">Text</a></li>
+<li><a href="#navigation">Navigation</a></li>
+<li><a href="#pagination">Pagination</a></li>
+<li><a href="#search">Search</a><ol>
+<li><a href="#lunr-default">Lunr (default)</a></li>
+<li><a href="#algolia">Algolia</a></li>
+</ol>
+</li>
+<li><a href="#author">Author</a></li>
+<li><a href="#reading-time">Reading Time</a></li>
+<li><a href="#comments-via-disqus">Comments (via Disqus)</a></li>
+<li><a href="#google-analytics">Google Analytics</a></li>
+<li><a href="#copyright">Copyright</a></li>
+<li><a href="#layouts">Layouts</a></li>
+<li><a href="#layout-default"><code>layout: default</code></a></li>
+<li><a href="#layout-post"><code>layout: post</code></a></li>
+<li><a href="#layout-page"><code>layout: page</code></a></li>
+<li><a href="#layout-home"><code>layout: home</code></a></li>
+<li><a href="#layout-posts"><code>layout: posts</code></a></li>
+<li><a href="#layout-categories"><code>layout: categories</code></a></li>
+<li><a href="#layout-tags"><code>layout: tags</code></a></li>
+<li><a href="#layout-collection"><code>layout: collection</code></a></li>
+<li><a href="#layout-category"><code>layout: category</code></a></li>
+<li><a href="#layout-tag"><code>layout: tag</code></a></li>
+<li><a href="#layout-about"><code>layout: about</code></a></li>
+<li><a href="#layout-cv"><code>layout: cv</code></a></li>
+<li><a href="#images">Images</a></li>
+<li><a href="#customization">Customization</a></li>
+<li><a href="#overriding-includes-and-layouts">Overriding Includes and Layouts</a></li>
+<li><a href="#customizing-sass-scss">Customizing Sass (SCSS)</a></li>
+<li><a href="#customizing-javascript">Customizing JavaScript</a></li>
+<li><a href="#svg-icons">SVG Icons</a></li>
+<li><a href="#customizing-sidebar-content">Customizing Sidebar Content</a></li>
+<li><a href="#development">Development</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#credits">Credits</a></li>
+<li><a href="#license">License</a></li>
+</ol>
+<h2 id="installation">Installation</h2>
+<p>If you're running Jekyll v3.5+ and self-hosting you can quickly install the 
+theme as a Ruby gem. If you're hosting with GitHub Pages you can install as a 
+remote theme or directly copy all of the theme files (see <a href="#structure">structure</a> 
+below) into your project.</p>
+<h3 id="ruby-gem-method">Ruby Gem Method</h3>
+<ol>
+<li>Add this line to your Jekyll site's <code>Gemfile</code>:</li>
+</ol>
+<p><code>ruby
+   gem "jekyll-theme-basically-basic"</code>
+2. Add this line to your Jekyll site's <code>_config.yml</code> file:</p>
+<p><code>yaml
+   theme: jekyll-theme-basically-basic</code></p>
+<ol>
+<li>Then run <a href="http://bundler.io/">Bundler</a> to install the theme gem and dependencies:</li>
+</ol>
+<p><code>terminal
+   bundle install</code></p>
+<h3 id="github-pages-method">GitHub Pages Method</h3>
+<p>GitHub Pages has added <a href="https://github.com/blog/2464-use-any-theme-with-github-pages">full support</a> 
+for any GitHub-hosted theme.</p>
+<ol>
+<li>Replace <code>gem "jekyll"</code> with:</li>
+</ol>
+<p><code>ruby
+   gem "github-pages", group: :jekyll_plugins</code></p>
+<ol>
+<li>
+<p>Run <code>bundle update</code> and verify that all gems install properly.</p>
+</li>
+<li>
+<p>Add <code>remote_theme: "mmistakes/jekyll-theme-basically-basic"</code> to your 
+   <code>_config.yml</code> file. Remove any other <code>theme:</code> or <code>remote_theme:</code> entries.</p>
+</li>
+</ol>
+<hr />
+<p><strong>Note:</strong> Your Jekyll site should be viewable immediately at 
+<a href="http://USERNAME.github.io">http://USERNAME.github.io</a>. If it's not, you can force a rebuild by 
+<strong>Customizing Your Site</strong> (see below for more details).</p>
+<p>If you're hosting several Jekyll based sites under the same GitHub username you 
+will have to use Project Pages instead of User Pages. Essentially you rename the 
+repo to something other than <strong>USERNAME.github.io</strong> and create a <code>gh-pages</code> 
+branch off of <code>master</code>. For more details on how to set things up check 
+<a href="https://help.github.com/articles/user-organization-and-project-pages/">GitHub's documentation</a>.</p>
+<h4 id="remove-the-unnecessary">Remove the Unnecessary</h4>
+<p>If you forked or downloaded the <code>jekyll-theme-basically-basic</code> repo you can 
+safely remove the following files and folders:</p>
+<ul>
+<li><code>.editorconfig</code></li>
+<li><code>.gitattributes</code></li>
+<li><code>.github</code></li>
+<li><code>.scss-lint.yml</code></li>
+<li><code>CHANGELOG.md</code></li>
+<li><code>jekyll-theme-basically-basic.gemspec</code></li>
+<li><code>LICENSE</code></li>
+<li><code>Rakefile</code></li>
+<li><code>README.md</code></li>
+<li><code>screenshot.png</code></li>
+<li><code>/docs</code></li>
+<li><code>/example</code></li>
+</ul>
+<h2 id="upgrading">Upgrading</h2>
+<p>If you're using the Ruby Gem or remote theme versions of Basically Basic, 
+upgrading is fairly painless.</p>
+<p>To check which version you are currently using, view the source of your built 
+site and you should something similar to:</p>
+<p><code>&lt;!--
+    Basically Basic Jekyll Theme 1.2.0
+    Copyright 2017-2018 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/jekyll-basically-theme/blob/master/LICENSE
+--&gt;</code></p>
+<p>At the top of every <code>.html</code> file, <code>/assets/css/main.css</code>, and <code>/assets/js/main.js</code>.</p>
+<h3 id="ruby-gem">Ruby Gem</h3>
+<p>Simply run <code>bundle update</code> if you're using Bundler (have a <code>Gemfile</code>) or <code>gem 
+update jekyll-theme-basically-basic</code> if you're not.</p>
+<h3 id="remote-theme">Remote Theme</h3>
+<p>When hosting with GitHub Pages you'll need to push up a commit to force a 
+rebuild with the latest <a href="https://github.com/mmistakes/jekyll-theme-basically-basic/releases">theme release</a>.</p>
+<p>An empty commit will get the job done too if you don't have anything to push at 
+the moment:</p>
+<p><code>terminal
+git commit --allow-empty -m "Force rebuild of site"</code></p>
+<h3 id="use-git">Use Git</h3>
+<p>If you want to get the most out of the Jekyll + GitHub Pages workflow, then 
+you'll need to utilize Git. To pull down theme updates you must first ensure 
+there's an upstream remote. If you forked the theme's repo then you're likely 
+good to go.</p>
+<p>To double check, run <code>git remote -v</code> and verify that you can fetch from <code>origin https://github.com/mmistakes/jekyll-theme-basically-basic.git</code>.</p>
+<p>To add it you can do the following:</p>
+<p><code>terminal
+git remote add upstream https://github.com/mmistakes/jekyll-theme-basically-basic.git</code></p>
+<h4 id="pull-down-updates">Pull Down Updates</h4>
+<p>Now you can pull any commits made to theme's <code>master</code> branch with:</p>
+<p><code>terminal
+git pull upstream master</code></p>
+<p>Depending on the amount of customizations you've made after forking, there's 
+likely to be merge conflicts. Work through any conflicting files Git flags, 
+staging the changes you wish to keep, and then commit them.</p>
+<h3 id="update-files-manually">Update Files Manually</h3>
+<p>Another way of dealing with updates is <a href="https://github.com/mmistakes/jekyll-theme-basically-basic/archive/master.zip">downloading the theme</a> 
+--- replacing your layouts, includes, and assets with the newer ones manually. 
+To be sure that you don't miss any changes it's probably a good idea to review 
+the theme's <a href="https://github.com/mmistakes/jekyll-theme-basically-basic/commits/master">commit history</a> 
+to see what's changed since.</p>
+<p>Here's a quick checklist of the important folders/files you'll want to be 
+mindful of:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_layouts</code></td>
+<td>Replace all. Apply edits if you customized any layouts.</td>
+</tr>
+<tr>
+<td><code>_includes</code></td>
+<td>Replace all. Apply edits if you customized any includes.</td>
+</tr>
+<tr>
+<td><code>assets</code></td>
+<td>Replace all. Apply edits if you customized stylesheets or scripts.</td>
+</tr>
+<tr>
+<td><code>_sass</code></td>
+<td>Replace all. Apply edits if you customized Sass partials.</td>
+</tr>
+<tr>
+<td><code>_data/theme.yml</code></td>
+<td>Safe to keep. Verify that there were no major structural changes or additions.</td>
+</tr>
+<tr>
+<td><code>_config.yml</code></td>
+<td>Safe to keep. Verify that there were no major structural changes or additions.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Note:</strong> If you're not seeing the latest version, be sure to flush browser and 
+CDN caches. Depending on your hosting environment older versions of 
+<code>/assets/css/main.css</code>, <code>/assets/js/main.js</code>, or <code>*.html</code> may be cached.</p>
+<h2 id="structure">Structure</h2>
+<p>Layouts, includes, Sass partials, and data files are all placed in their default 
+locations. Stylesheets and scripts in <code>assets</code>, and a few development related 
+files in the project's root directory.</p>
+<p><strong>Please note:</strong> If you installed Basically Basic via the Ruby Gem method, theme 
+files found in <code>/_layouts</code>, <code>/_includes</code>, <code>/_sass</code>, and <code>/assets</code> will be 
+missing. This is normal as they are bundled with the <a href="https://rubygems.org/gems/jekyll-theme-basically-basic"><code>jekyll-theme-basically-basic</code></a> gem.</p>
+<p><code>terminal
+jekyll-theme-basically-basic
+âââ _data                      # data files
+|  âââ theme.yml               # theme settings and custom text
+âââ _includes                  # theme includes and SVG icons
+âââ _layouts                   # theme layouts (see below for details)
+âââ _sass                      # Sass partials
+âââ assets
+|  âââ javascripts
+|  |  âââ main.js
+|  âââ stylesheets
+|     âââ main.scss
+âââ _config.yml                # sample configuration
+âââ index.md                   # sample home page (all posts/not paginated)</code></p>
+<h3 id="starting-fresh">Starting Fresh</h3>
+<p>After creating a <code>Gemfile</code> and installing the theme you'll need to add and edit 
+the following files:</p>
+<ul>
+<li><a href="_config.yml"><code>_config.yml</code></a></li>
+<li><a href="_data/theme.yml"><code>/_data/theme.yml</code></a></li>
+<li><a href="index.md"><code>index.md</code></a> </li>
+</ul>
+<p><strong>Note:</strong> Consult the <a href="#pagination"><strong>pagination</strong></a> documentation below for
+instructions on how to enable it for the home page.</p>
+<h3 id="starting-from-jekyll-new">Starting from <code>jekyll new</code></h3>
+<p>Using the <code>jekyll new</code> command will get you up and running the quickest.</p>
+<p>Edit <code>_config.yml</code> and create <code>_data/theme.yml</code> as instructed above and you're 
+good to go.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Configuration of site-wide elements (<code>lang</code>, <code>title</code>, <code>description</code>, <code>logo</code>, 
+<code>author</code>, etc.) happens in your project's <code>_config.yml</code>. See the 
+<a href="example/_config.yml">example configuration</a> in this repo for additional 
+reference.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lang</code></td>
+<td>Used to indicate the language of text (e.g., en-US, en-GB, fr)</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>Your site's title (e.g., Dungan's Awesome Site)</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Short site description (e.g., A blog about grasshopper mash)</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>The full URL to your site (e.g., https://groverloaf.org)</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>Global author information (see below)</td>
+</tr>
+<tr>
+<td><code>logo</code></td>
+<td>Path to a site-wide logo ~100x100px (e.g., /assets/your-company-logo.png)</td>
+</tr>
+<tr>
+<td><code>twitter_username</code></td>
+<td>Site-wide Twitter username, used as a link in sidebar</td>
+</tr>
+<tr>
+<td><code>github_username</code></td>
+<td>Site-wide GitHub username, used as a link in sidebar</td>
+</tr>
+</tbody>
+</table>
+<p>For more configuration options be sure to consult the documentation for: 
+<a href="https://github.com/jekyll/jekyll-seo-tag"><strong>jekyll-seo-tag</strong></a>, <a href="https://github.com/jekyll/jekyll-feed"><strong>jekyll-feed</strong></a>, 
+<a href="https://github.com/jekyll/jekyll-paginate"><strong>jekyll-paginate</strong></a>, and <a href="https://github.com/jekyll/jekyll-sitemap"><strong>jekyll-sitemap</strong></a>.</p>
+<h3 id="skin">Skin</h3>
+<p>This theme comes in six different skins (color variations). To change skins add 
+one of the following to your <a href="_data/theme.yml"><code>/_data/theme.yml</code></a> file:</p>
+<table>
+<thead>
+<tr>
+<th><code>skin: default</code></th>
+<th><code>skin: night</code></th>
+<th><code>skin: plum</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="default-skin" src="https://cloud.githubusercontent.com/assets/1376749/24115744/c0618c90-0d7a-11e7-8e2d-ec70f9db0c1b.png" /></td>
+<td><img alt="night-skin" src="https://cloud.githubusercontent.com/assets/1376749/24115770/d61127f8-0d7a-11e7-9158-986bee2be8e7.png" /></td>
+<td><img alt="plum-skin" src="https://cloud.githubusercontent.com/assets/1376749/24115778/db523a0e-0d7a-11e7-9452-8692b736d67e.png" /></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>skin: sea</code></th>
+<th><code>skin: soft</code></th>
+<th><code>skin: steel</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="sea-skin" src="https://cloud.githubusercontent.com/assets/1376749/24115788/e27d818a-0d7a-11e7-8c56-2480e9ae83fb.png" /></td>
+<td><img alt="soft-skin" src="https://cloud.githubusercontent.com/assets/1376749/24115790/e6e548e8-0d7a-11e7-8e2d-d8053e8befd1.png" /></td>
+<td><img alt="steel-skin" src="https://cloud.githubusercontent.com/assets/1376749/24115799/eb2108e8-0d7a-11e7-8cc3-a6f22e4082ee.png" /></td>
+</tr>
+</tbody>
+</table>
+<h3 id="google-fonts">Google Fonts</h3>
+<p>This theme allows you to easily use <a href="https://fonts.google.com/">Google Fonts</a> 
+throughout the theme. Simply add the following to your 
+<a href="_data/theme.yml"><code>/_data/theme.yml</code></a>, replacing the font <code>name</code> and <code>weights</code> 
+accordingly.</p>
+<p><code>yaml
+google_fonts:
+  - name: "Fira Sans"
+    weights: "400,400i,600,600i"
+  - name: "Fira Sans Condensed"</code></p>
+<h3 id="text">Text</h3>
+<p>To change text found throughout the theme add the following to your 
+<a href="_data/theme.yml"><code>/_data/theme.yml</code></a> file and customize as necessary.</p>
+<p><code>yaml
+t:
+  skip_links: "Skip links"
+  skip_primary_nav: "Skip to primary navigation"
+  skip_content: "Skip to content"
+  skip_footer: "Skip to footer"
+  menu: "Menu"
+  home: "Home"
+  newer: "Newer"
+  older: "Older"
+  email: "Email"
+  subscribe: "Subscribe"
+  read_more: "Read More"
+  posts: "Posts"
+  page: "Page"
+  of: "of"
+  min_read: "min read"
+  present: "Present"</code></p>
+<h3 id="navigation">Navigation</h3>
+<p>By default all internal pages with a <code>title</code> will be added to the "off-canvas" 
+menu. For more granular control and sorting of these menu links:</p>
+<ol>
+<li>
+<p>Create a custom list to override the default setting by adding a 
+<code>navigation_pages</code> array to your <a href="_data/theme.yml"><code>/_data/theme.yml</code></a> file. </p>
+</li>
+<li>
+<p>Add raw page paths in the order you'd like:</p>
+</li>
+</ol>
+<p><code>yaml
+   navigation_pages:
+     - about.md
+     - cv.md</code></p>
+<p>Each menu link's title and URL will be populated based on their <code>title</code> and 
+<code>permalink</code> respectively.</p>
+<h3 id="pagination">Pagination</h3>
+<p>Break up the main listing of posts into smaller lists and display them over 
+multiple pages by <a href="http://jekyllrb.com/docs/pagination/">enabling pagination</a>.</p>
+<ol>
+<li>Include the <code>jekyll-paginate</code> plugin in your <code>Gemfile</code>.</li>
+</ol>
+<p><code>ruby
+   group :jekyll_plugins do
+     gem "jekyll-paginate"
+   end</code></p>
+<ol>
+<li>Add <code>jekyll-paginate</code> to <code>gems</code> array in your <code>_config.yml</code> file and the 
+following pagination settings:</li>
+</ol>
+<p><code>yaml
+   paginate: 5  # amount of posts to show per page
+   paginate_path: /page:num/</code></p>
+<ol>
+<li>Create <code>index.html</code> (or rename <code>index.md</code>) in the root of your project and 
+add the following front matter:</li>
+</ol>
+<p><code>yaml
+   layout: home
+   paginate: true</code></p>
+<h3 id="search">Search</h3>
+<p>To enable site-wide search add <code>search: true</code> to your <code>_config.yml</code>.</p>
+<h4 id="lunr-default">Lunr (default)</h4>
+<p>The default search uses <a href="https://lunrjs.com/"><strong>Lunr</strong></a> to build a search index of all your documents. This method is 100% compatible with sites hosted on GitHub Pages.</p>
+<p><strong>Note:</strong> Only the first 50 words of a post or page's body content is added to the Lunr search index. Setting <code>search_full_content</code> to <code>true</code> in your <code>_config.yml</code> will override this and could impact page load performance.</p>
+<h4 id="algolia">Algolia</h4>
+<p>For faster and more relevant search (<a href="https://mmistakes.github.io/jekyll-theme-basically-basic-algolia-search/">see demo</a>):</p>
+<ol>
+<li>Add the <a href="https://github.com/algolia/jekyll-algolia"><code>jekyll-algolia</code></a> gem to your <code>Gemfile</code>, in the <code>:jekyll_plugins</code> section.</li>
+</ol>
+<p><code>ruby
+   group :jekyll_plugins do
+     gem "jekyll-feed"
+     gem "jekyll-seo-tag"
+     gem "jekyll-sitemap"
+     gem "jekyll-paginate"
+     gem "jekyll-algolia"
+   end</code></p>
+<p>Once this is done, download all dependencies by running <code>bundle install</code>.</p>
+<ol>
+<li>Switch search providers from <code>lunr</code> to <code>algolia</code> in your <code>_config.yml</code> file:</li>
+</ol>
+<p><code>yaml
+   search_provider: algolia</code></p>
+<ol>
+<li>Add the following Algolia credentials to your <code>_config.yml</code> file. <em>If you don't have an Algolia account, you can open a free <a href="https://www.algolia.com/users/sign_up/hacker">Community plan</a>. Once signed in, you can grab your credentials from <a href="https://www.algolia.com/licensing">your dashboard</a>.</em></li>
+</ol>
+<p><code>yaml
+   algolia:
+     application_id: # YOUR_APPLICATION_ID
+     index_name: # YOUR_INDEX_NAME
+     search_only_api_key: # YOUR_SEARCH_ONLY_API_KEY
+     powered_by: # true (default), false</code></p>
+<ol>
+<li>Once your credentials are setup, you can run the indexing with the following command:</li>
+</ol>
+<p><code>ALGOLIA_API_KEY=your_admin_api_key bundle exec jekyll algolia</code></p>
+<p>For Windows users you will have to use <code>set</code> to assigned the <code>ALGOLIA_API_KEY</code> environment variable.</p>
+<p><code>set ALGOLIA_API_KEY=your_admin_api_key
+   bundle exec jekyll algolia</code></p>
+<p>Note that <code>ALGOLIA_API_KEY</code> should be set to your admin API key.</p>
+<p>To use the Algolia search with GitHub Pages hosted sites follow <a href="https://community.algolia.com/jekyll-algolia/github-pages.html">this deployment guide</a>. Or this guide for <a href="https://community.algolia.com/jekyll-algolia/netlify.html">deploying on Netlify</a>.</p>
+<p><strong>Note:</strong> The Jekyll Algolia plugin can be configured in several ways. Be sure to check out <a href="https://community.algolia.com/jekyll-algolia/options.html" title="Algolia configuration">their full documentation</a> on how to exclude files and other valuable settings.</p>
+<h3 id="author">Author</h3>
+<p>Author information is used as meta data for post "by lines" and propagates the 
+<code>creator</code> field of Twitter summary cards with the following front matter in 
+<code>_config.yml</code>:</p>
+<p><code>yaml
+author:
+  name: John Doe
+  twitter: johndoetwitter
+  picture: /assets/images/johndoe.png</code></p>
+<p>Site-wide author information can be overridden in a document's front matter in 
+the same way:</p>
+<p><code>yaml
+author:
+  name: Jane Doe
+  twitter: janedoetwitter
+  picture: /assets/images/janedoe.png</code></p>
+<p>Or by specifying a corresponding key in the document's front matter, that 
+exists in <code>site.data.authors</code>. E.g., you have the following in the document's 
+front matter:</p>
+<p><code>yaml
+author: megaman</code></p>
+<p>And you have the following in <code>_data/authors.yml</code>:</p>
+<p>```yaml
+megaman:
+  name: Mega Man
+  twitter: megamantwitter
+  picture: /assets/images/megaman.png</p>
+<p>drlight:
+  name: Dr. Light
+  twitter: drlighttwitter
+  picture: /assets/images/drlight.png
+```</p>
+<p>Currently <code>author.picture</code> is only used in <code>layout: about</code>. Recommended size is 
+<code>300 x 300</code> pixels.</p>
+<h3 id="reading-time">Reading Time</h3>
+<p>To enable reading time counts add <code>read_time: true</code> to a post or page's YAML 
+Front Matter.</p>
+<h3 id="comments-via-disqus">Comments (via Disqus)</h3>
+<p>Optionally, if you have a <a href="https://disqus.com/">Disqus</a> account, you can show a 
+comments section below each post.</p>
+<p>To enable Disqus comments, add your <a href="https://help.disqus.com/customer/portal/articles/466208">Disqus shortname</a> to your project's 
+<code>_config.yml</code> file:</p>
+<p><code>yaml
+  disqus:
+    shortname: my_disqus_shortname</code></p>
+<p>Comments are enabled by default and will only appear in production when built 
+with the following <a href="http://jekyllrb.com/docs/configuration/#specifying-a-jekyll-environment-at-build-time">environment value</a>: 
+<code>JEKYLL_ENV=production</code></p>
+<p>If you don't want to display comments for a particular post you can disable 
+them by adding <code>comments: false</code> to that post's front matter.</p>
+<h3 id="google-analytics">Google Analytics</h3>
+<p>To enable Google Analytics, add your <a href="https://support.google.com/analytics/answer/1032385">tracking ID</a> 
+to <code>_config.yml</code> like so:</p>
+<p><code>yaml
+  google_analytics: UA-NNNNNNNN-N</code></p>
+<p>Similar to comments, the Google Analytics tracking script will only appear in 
+production when using the following environment value: <code>JEKYLL_ENV=production</code>.</p>
+<h3 id="copyright">Copyright</h3>
+<p>By default the copyright line in the footer displays the current year 
+(at build time) followed by your site's title. e.g. <code>Â© 2018 Basically Basic.</code></p>
+<p>If you would like to change this add <code>copyright</code> to your <code>_config.yml</code> file 
+with appropriate text:</p>
+<p><code>yaml
+copyright: "My custom copyright."</code></p>
+<h2 id="layouts">Layouts</h2>
+<p>This theme provides the following layouts, which you can use by setting the 
+<code>layout</code> <a href="https://jekyllrb.com/docs/frontmatter/">Front Matter</a> on each page, 
+like so:</p>
+<h2 id="yaml">```yaml</h2>
+<h2 id="layout-name">layout: name</h2>
+<p>```</p>
+<h3 id="layout-default"><code>layout: default</code></h3>
+<p>This layout handles all of the basic page scaffolding placing the page content 
+between the masthead and footer elements. All other layouts inherit this one 
+and provide additional styling and features inside of the <code>{{ content }}</code> block.</p>
+<h3 id="layout-post"><code>layout: post</code></h3>
+<p>This layout accommodates the following front matter:</p>
+<p>```yaml</p>
+<h1 id="optional-alternate-title-to-replace-pagetitle-at-the-top-of-the-page">optional alternate title to replace page.title at the top of the page</h1>
+<p>alt_title: "Basically Basic"</p>
+<h1 id="optional-sub-title-below-the-page-title">optional sub-title below the page title</h1>
+<p>sub_title: "The name says it all"</p>
+<h1 id="optional-intro-text-below-titles-markdown-allowed">optional intro text below titles, Markdown allowed</h1>
+<p>introduction: |
+    Basically Basic is a Jekyll theme meant to be a substitute for the default --- <a href="https://github.com/jekyll/minima">Minima</a>. Conventions and features found in Minima are fully supported by <strong>Basically Basic</strong>.</p>
+<h1 id="optional-call-to-action-links">optional call to action links</h1>
+<p>actions:
+  - label: "Learn More"
+    icon: github  # references name of svg icon, see full list below
+    url: "http://url-goes-here.com"
+  - label: "Download"
+    icon: download  # references name of svg icon, see full list below
+    url: "http://url-goes-here.com"</p>
+<p>image:  # URL to a hero image associated with the post (e.g., /assets/page-pic.jpg)</p>
+<h1 id="post-specific-author-data-if-different-from-what-is-set-in-_configyml">post specific author data if different from what is set in _config.yml</h1>
+<p>author:
+  name: John Doe
+  twitter: johndoetwitter</p>
+<p>comments: false  # disable comments on this post
+```</p>
+<p><strong>Note:</strong> Hero images can be overlaid with a transparent "accent" color to unify them with the theme's palette. To enable, <a href="#customizing-sass-scss">customize the CSS</a> with the following Sass variable override:</p>
+<p><code>scss
+$intro-image-color-overlay: true;</code></p>
+<h3 id="layout-page"><code>layout: page</code></h3>
+<p>Visually this layout looks and acts the same as <code>layout: post</code>, with two minor 
+differences.</p>
+<ul>
+<li>Author "by line" and publish date are omitted.</li>
+<li>Disqus comments are omitted.</li>
+</ul>
+<h3 id="layout-home"><code>layout: home</code></h3>
+<p>This layout accommodates the same front matter as <code>layout: page</code>, with the 
+addition of the following:</p>
+<p><code>yaml
+paginate: true  # enables pagination loop, see section above for additional setup
+entries_layout: # list (default), grid</code></p>
+<p>By default, posts are shown in a list view. To change to a grid view add <code>entries_layout: grid</code> to the page's front matter.</p>
+<h3 id="layout-posts"><code>layout: posts</code></h3>
+<p>This layout displays all posts grouped by the year they were published. It accommodates the same front matter as <code>layout: page</code>.</p>
+<p>By default, posts are shown in a list view. To change to a grid view add <code>entries_layout: grid</code> to the page's front matter.</p>
+<h3 id="layout-categories"><code>layout: categories</code></h3>
+<p>This layout displays all posts grouped category. It accommodates the same front matter as <code>layout: page</code>.</p>
+<p>By default, posts are shown in a list view. To change to a grid view add <code>entries_layout: grid</code> to the page's front matter.</p>
+<h3 id="layout-tags"><code>layout: tags</code></h3>
+<p>This layout displays all posts grouped by tag. It accommodates the same front matter as <code>layout: page</code>.</p>
+<p>By default, posts are shown in a list view. To change to a grid view add <code>entries_layout: grid</code> to the page's front matter.</p>
+<h3 id="layout-collection"><code>layout: collection</code></h3>
+<p>This layout displays all documents grouped by a specific collection. It accommodates the same front matter as <code>layout: page</code> with the addition of the following:</p>
+<p><code>yaml
+collection: # collection name
+entries_layout: # list (default), grid
+show_excerpts: # true (default), false
+sort_by: # date (default) title
+sort_order: # forward (default), reverse</code></p>
+<p>To create a page showing all documents in the <code>recipes</code> collection you'd create <code>recipes.md</code> in the root of your project and add this front matter:</p>
+<p><code>yaml
+title: Recipes
+layout: collection
+permalink: /recipes/
+collection: recipes</code></p>
+<p>By default, documents are shown in a list view. To change to a grid view add <code>entries_layout: grid</code> to the page's front matter. If you want to sort the collection by title add <code>sort_by: title</code>. If you want reverse sorting, add <code>sort_order: reverse</code>.</p>
+<h3 id="layout-category"><code>layout: category</code></h3>
+<p>This layout displays all posts grouped by a specific category. It accommodates the same front matter as <code>layout: page</code> with the addition of the following:</p>
+<p><code>yaml
+taxonomy: # category name
+entries_layout: # list (default), grid</code></p>
+<p>By default, posts are shown in a list view. To change to a grid view add <code>entries_layout: grid</code> to the page's front matter.</p>
+<p>To create a page showing all posts assigned to the category <code>foo</code> you'd create <code>foo.md</code> in the root of your project and add this front matter:</p>
+<p><code>yaml
+title: Foo
+layout: category
+permalink: /categories/foo/
+taxonomy: foo</code></p>
+<h3 id="layout-tag"><code>layout: tag</code></h3>
+<p>This layout displays all posts grouped by a specific tag. It accommodates the same front matter as <code>layout: page</code> with the addition of the following:</p>
+<p><code>yaml
+taxonomy: # tag name
+entries_layout: # list (default), grid</code></p>
+<p>By default, posts are shown in a list view. To change to a grid view add <code>entries_layout: grid</code> to the page's front matter.</p>
+<p>To create a page showing all posts assigned to the tag <code>foo bar</code> you'd create <code>foo-bar.md</code> in the root of your project and add this front matter:</p>
+<p><code>yaml
+title: Foo Bar
+layout: tag
+permalink: /tags/foo-bar/
+taxonomy: foo bar</code></p>
+<h3 id="layout-about"><code>layout: about</code></h3>
+<p>This layout accommodates the same front matter as <code>layout: page</code>, with the 
+addition of the following to display an author picture:</p>
+<p><code>yaml
+author:
+  name: John Doe
+  picture: /assets/images/johndoe.png</code></p>
+<p>Recommended <code>picture</code> size is approximately <code>300 x 300</code> pixels. If <code>author</code> 
+object is not explicitly set in the about page's front matter the theme 
+will default to the value set in <code>_config.yml</code>.</p>
+<p>If blank there no image will appear.</p>
+<h3 id="layout-cv"><code>layout: cv</code></h3>
+<p>This layout accommodates the same front matter as <code>layout: page</code>. It 
+leverages a <a href="https://jsonresume.org/schema/">JSON-based file standard</a> for 
+resume data to conveniently render a curriculum vitÃ¦ or resume painlessly.</p>
+<p>Simply use JSON Resume's <a href="http://registry.jsonresume.org/">in-browser resume builder</a> 
+to export a JSON file and save to your project as <code>_data/cv.json</code>.</p>
+<h2 id="images">Images</h2>
+<p>Suggested image sizes in pixels are as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Image</th>
+<th>Description</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page.image.path</code></td>
+<td>Large full-width document image.</td>
+<td>Tall images will push content down the page. <code>1600 x 600</code>is a good middle-ground size to aim for.</td>
+</tr>
+<tr>
+<td><code>page.image</code></td>
+<td>Short-hand for <code>page.image.path</code>when used alone (without <code>thumbnail</code> <code>caption</code> or other variables).</td>
+<td>Same as <code>page.image.path</code></td>
+</tr>
+<tr>
+<td><code>page.image.thumbnail</code></td>
+<td>Small document image used in grid view.</td>
+<td><code>400 x 200</code></td>
+</tr>
+<tr>
+<td><code>author.picture</code></td>
+<td>Author page image.</td>
+<td><code>300 x 300</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="customization">Customization</h2>
+<p>The default structure, style, and scripts of this theme can be overridden and 
+customized in the following two ways.</p>
+<h3 id="overriding-includes-and-layouts">Overriding Includes and Layouts</h3>
+<p>Theme defaults can be <a href="http://jekyllrb.com/docs/themes/#overriding-theme-defaults">overridden</a> 
+by placing a file with the same name into your project's <code>_includes</code> or 
+<code>_layouts</code> directory. For instance:</p>
+<ul>
+<li>To specify a custom style path or meta data to the <a href="_includes/head.html"><code>_includes/head.html</code></a> 
+file, create an <code>_includes</code> directory in your project, copy 
+<code>_includes/head.html</code> from Basically Basic's gem folder to 
+<code>&lt;your_project&gt;/_includes</code> and start editing that file.</li>
+</ul>
+<p><strong>ProTip:</strong> to locate the theme's files on your computer run 
+<code>bundle show jekyll-theme-basically-basic</code>. This returns the location of the 
+gem-based theme files.</p>
+<h3 id="customizing-sass-scss">Customizing Sass (SCSS)</h3>
+<p>To override the default <a href="http://sass-lang.com/guide">Sass</a> (located in theme's 
+<code>_sass</code> directory), do one of the following:</p>
+<ol>
+<li>
+<p>Copy directly from the Basically Basic gem</p>
+</li>
+<li>
+<p>Go to your local Basically Basic gem installation directory (run 
+     <code>bundle show jekyll-theme-basically-basic</code> to get the path to it).</p>
+</li>
+<li>Copy the contents of <code>/assets/stylesheets/main.scss</code> from there to 
+     <code>&lt;your_project&gt;</code>.</li>
+<li>
+<p>Customize what you want inside <code>&lt;your_project&gt;/assets/stylesheets/main.scss</code>.</p>
+</li>
+<li>
+<p>Copy from this repo.</p>
+</li>
+<li>
+<p>Copy the contents of <a href="assets/stylesheets/main.scss">assets/stylesheets/main.scss</a> 
+     to <code>&lt;your_project&gt;</code>.</p>
+</li>
+<li>Customize what you want inside <code>&lt;your_project/assets/stylesheets/main.scss</code>.</li>
+</ol>
+<p><strong>Note:</strong> To make more extensive changes and customize the Sass partials bundled 
+in the gem. You will need to copy the complete contents of the <code>_sass</code> directory 
+to <code>&lt;your_project&gt;</code> due to the way Jekyll currently reads those files.</p>
+<p>To make basic tweaks to theme's style Sass variables can be overridden by adding 
+to <code>&lt;your_project&gt;/assets/stylesheets/main.scss</code>. For instance, to change the 
+accent color used throughout the theme add the following:</p>
+<p><code>scss
+$accent-color: red;</code></p>
+<h3 id="customizing-javascript">Customizing JavaScript</h3>
+<p>To override the default JavaScript bundled in the theme, do one of the following:</p>
+<ol>
+<li>
+<p>Copy directly from the Basically Basic gem</p>
+</li>
+<li>
+<p>Go to your local Basically Basic gem installation directory (run 
+     <code>bundle show jekyll-theme-basically-basic</code> to get the path to it).</p>
+</li>
+<li>Copy the contents of <code>/assets/javascripts/main.js</code> from there to 
+     <code>&lt;your_project&gt;</code>.</li>
+<li>
+<p>Customize what you want inside <code>&lt;your_project&gt;/assets/javascripts/main.js</code>.</p>
+</li>
+<li>
+<p>Copy from this repo.</p>
+</li>
+<li>
+<p>Copy the contents of <a href="assets/javascripts/main.js">assets/javascripts/main.js</a> 
+     to <code>&lt;your_project&gt;</code>.</p>
+</li>
+<li>Customize what you want inside <code>&lt;your_project&gt;/assets/javascripts/main.js</code>.</li>
+</ol>
+<h3 id="svg-icons">SVG Icons</h3>
+<p>The theme uses social network logos and other iconography saved as SVGs for 
+performance and flexibility. Said SVGs are located in the <code>_includes</code> directory 
+and prefixed with <code>icon-</code>. Each icon has been sized and designed to fit a 
+<code>16 x 16</code> viewbox and optimized with <a href="https://github.com/svg/svgo">SVGO</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Icon</th>
+<th>Filename</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-arrow-left.svg" width="16" height="16"></td>
+<td>icon-arrow-left.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-arrow-right.svg" width="16" height="16"></td>
+<td>icon-arrow-right.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-bitbucket.svg" width="16" height="16"></td>
+<td>icon-bitbucket.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-calendar.svg" width="16" height="16"></td>
+<td>icon-calendar.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-codepen.svg" width="16" height="16"></td>
+<td>icon-codepen.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-download.svg" width="16" height="16"></td>
+<td>icon-download.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-dribbble.svg" width="16" height="16"></td>
+<td>icon-dribbble.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-email.svg" width="16" height="16"></td>
+<td>icon-email.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-facebook.svg" width="16" height="16"></td>
+<td>icon-facebook.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-flickr.svg" width="16" height="16"></td>
+<td>icon-flickr.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-github.svg" width="16" height="16"></td>
+<td>icon-github.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-gitlab.svg" width="16" height="16"></td>
+<td>icon-gitlab.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-googleplus.svg" width="16" height="16"></td>
+<td>icon-googleplus.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-instagram.svg" width="16" height="16"></td>
+<td>icon-instagram.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-lastfm.svg" width="16" height="16"></td>
+<td>icon-lastfm.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-linkedin.svg" width="16" height="16"></td>
+<td>icon-linkedin.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-pdf.svg" width="16" height="16"></td>
+<td>icon-pdf.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-pinterest.svg" width="16" height="16"></td>
+<td>icon-pinterest.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-rss.svg" width="16" height="16"></td>
+<td>icon-rss.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-soundcloud.svg" width="16" height="16"></td>
+<td>icon-soundcloud.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-stackoverflow.svg" width="16" height="16"></td>
+<td>icon-stackoverflow.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-stopwatch.svg" width="16" height="16"></td>
+<td>icon-stopwatch.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-tumblr.svg" width="16" height="16"></td>
+<td>icon-tumblr.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-twitter.svg" width="16" height="16"></td>
+<td>icon-twitter.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-xing.svg" width="16" height="16"></td>
+<td>icon-xing.svg</td>
+</tr>
+<tr>
+<td><img src="https://cdn.rawgit.com/mmistakes/jekyll-theme-basically-basic/master/_includes/icon-youtube.svg" width="16" height="16"></td>
+<td>icon-youtube.svg</td>
+</tr>
+</tbody>
+</table>
+<p>Fill colors are defined in the <code>_sass/basically-basic/_icons.scss</code> partial and 
+set with <code>.icon-name</code> where class name matches the corresponding icon.</p>
+<p>For example the Twitter icon is given a fill color of <code>#1da1f2</code> like so:</p>
+<p><code>html
+&lt;span class="icon icon--twitter"&gt;{% include icon-twitter.svg %}&lt;/span&gt;</code></p>
+<p>Alongside the SVG assets, there are icon helper includes to aid in generating 
+social network links.</p>
+<table>
+<thead>
+<tr>
+<th>Include Parameter</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>username</code></td>
+<td>Username on given social network</td>
+<td><strong>Required</strong></td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>Text used for hyperlink</td>
+<td>Optional, defaults to <code>username</code></td>
+</tr>
+</tbody>
+</table>
+<p>For example, the following <code>icon-github.html</code> include:</p>
+<p><code>liquid
+{% include icon-github.html username=jekyll label='GitHub' %}</code></p>
+<p>Will output the following HTML:</p>
+<p><code>html
+&lt;a href="https://github.com/jekyll"&gt;
+  &lt;span class="icon icon--github"&gt;&lt;svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"&gt;&lt;path d="M8 0C3.58 0 0 3.582 0 8c0 3.535 2.292 6.533 5.47 7.59.4.075.547-.172.547-.385 0-.19-.007-.693-.01-1.36-2.226.483-2.695-1.073-2.695-1.073-.364-.924-.89-1.17-.89-1.17-.725-.496.056-.486.056-.486.803.056 1.225.824 1.225.824.714 1.223 1.873.87 2.33.665.072-.517.278-.87.507-1.07-1.777-.2-3.644-.888-3.644-3.953 0-.873.31-1.587.823-2.147-.09-.202-.36-1.015.07-2.117 0 0 .67-.215 2.2.82.64-.178 1.32-.266 2-.27.68.004 1.36.092 2 .27 1.52-1.035 2.19-.82 2.19-.82.43 1.102.16 1.915.08 2.117.51.56.82 1.274.82 2.147 0 3.073-1.87 3.75-3.65 3.947.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.14.46.55.38C13.71 14.53 16 11.53 16 8c0-4.418-3.582-8-8-8"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;
+  &lt;span class="label"&gt;GitHub&lt;/span&gt;
+&lt;/a&gt;</code></p>
+<h3 id="customizing-sidebar-content">Customizing Sidebar Content</h3>
+<hr />
+<h2 id="development">Development</h2>
+<p>To set up your environment to develop this theme:</p>
+<ol>
+<li>Clone this repo</li>
+<li><code>cd</code> into <code>/example</code> and run <code>bundle install</code>.</li>
+</ol>
+<p>To test the theme the locally as you make changes to it:</p>
+<ol>
+<li><code>cd</code> into the root folder of the repo (e.g. <code>jekyll-theme-basically-basic</code>).</li>
+<li>Run <code>bundle exec rake preview</code> and open your browser to 
+   <code>http://localhost:4000/example/</code>. </li>
+</ol>
+<p>This starts a Jekyll server using the theme's files and contents of the 
+<code>example/</code> directory. As modifications are made, refresh your browser to see 
+any changes.</p>
+<h2 id="contributing">Contributing</h2>
+<p>Found a typo in the documentation? Interested in adding a feature or 
+<a href="https://github.com/mmistakes/jekyll-theme-basically-basic/issues">fixing a bug</a>? Then by all means <a href="https://github.com/mmistakes/jekyll-theme-basically-basic/issues/new">submit an issue</a> or take a
+stab at submitting a <a href="https://help.github.com/articles/using-pull-requests/">pull request</a>. If this is your first 
+pull request, it may be helpful to read up on the <a href="https://guides.github.com/introduction/flow/">GitHub Flow</a>.</p>
+<h3 id="pull-requests">Pull Requests</h3>
+<p>When submitting a pull request:</p>
+<ol>
+<li>Clone the repo.</li>
+<li>Create a branch off of <code>master</code> and give it a meaningful name (e.g.
+   <code>my-awesome-new-feature</code>) and describe the feature or fix.</li>
+<li>Open a pull request on GitHub.</li>
+</ol>
+<p>Sample pages can be found in the <a href="docs"><code>/docs</code></a> and <a href="/example"><code>/example</code></a> 
+folders if you'd like to tackle any "low-hanging fruit" like fixing typos, bad 
+grammar, etc.</p>
+<hr />
+<h2 id="credits">Credits</h2>
+<h3 id="creator">Creator</h3>
+<p><strong>Michael Rose</strong></p>
+<ul>
+<li><a href="https://mademistakes.com">https://mademistakes.com</a></li>
+<li><a href="https://twitter.com/mmistakes">https://twitter.com/mmistakes</a></li>
+<li><a href="https://github.com/mmistakes">https://github.com/mmistakes</a></li>
+</ul>
+<h3 id="icons-demo-images">Icons + Demo Images:</h3>
+<ul>
+<li><a href="https://simpleicons.org/">Simple Icons</a></li>
+<li><a href="https://thenounproject.com">Noun Project</a></li>
+<li><a href="https://unsplash.com/">Unsplash</a></li>
+</ul>
+<h3 id="other">Other:</h3>
+<ul>
+<li><a href="http://jekyllrb.com/">Jekyll</a></li>
+<li><a href="http://susy.oddbird.net/">Susy</a></li>
+<li><a href="http://breakpoint-sass.com/">Breakpoint</a></li>
+</ul>
+<hr />
+<h2 id="license">License</h2>
+<p>The MIT License (MIT)</p>
+<p>Copyright (c) 2017-2018 Michael Rose and contributors</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
+<p>Basically Basic incorporates icons from <a href="https://thenounproject.com/">The Noun Project</a>.
+Icons are distributed under Creative Commons Attribution 3.0 United States (CC BY 3.0 US).</p>
+<p>Basically Basic incorporates photographs from <a href="https://unsplash.com">Unsplash</a>.</p>
+<p>Basically Basic incorporates <a href="http://susy.oddbird.net/">Susy</a>,
+Copyright (c) 2017, Miriam Eric Suzanne.
+Susy is distributed under the terms of the <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause "New" or "Revised" License</a>.</p>
+<p>Basically Basic incorporates <a href="http://breakpoint-sass.com/">Breakpoint</a>.
+Breakpoint is distributed under the terms of the <a href="http://opensource.org/licenses/MIT">MIT/GPL Licenses</a>.</p>
+</body></html>
